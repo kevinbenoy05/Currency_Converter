@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Converter",
+            "request": "launch",
+            "mainClass": "Converter",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/gson-2.11.0.jar",
+                "${workspaceFolder}/lib/json-20220320.jar",
+                "${workspaceFolder}/lib/swingx-all-1.6.4.jar"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Launch GUI",
+            "request": "launch",
+            "mainClass": "GUI",
+            "classPaths": [
+                "${workspaceFolder}/bin",
+                "${workspaceFolder}/lib/gson-2.11.0.jar",
+                "${workspaceFolder}/lib/json-20220320.jar",
+                "${workspaceFolder}/lib/swingx-all-1.6.4.jar"
+            ]
+        }
+    ]
+}
