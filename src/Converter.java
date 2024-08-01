@@ -3,8 +3,21 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Properties;
 public class Converter {
     public static Scanner scanner = new Scanner(System.in);
+    public static String getAPIKey(){
+        Properties prop = new Properties();
+        String key = "";
+        try {
+            prop.load(new FileInputStream("config.properties"));
+            key = prop.getProperty("api.key");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return key;
+    }
+    private String APIKey = getAPIKey();
     public static void main(String[] arguments) throws IOException { //TESTING ONLY
         ArrayList<Currency> currencies = initialize();
         System.out.println("Welcome to the currency converter!");
@@ -28,7 +41,7 @@ public class Converter {
            return -1.0;
         }
         /*Convert*/
-        String request = "https://v6.exchangerate-api.com/v6/06741fac186a1c060f657f96/pair/" + ipc.toUpperCase() + "/" + opc.toUpperCase() + "/" + amount; //Set the URL
+        String request = "https://v6.exchangerate-api.com/v6/" + getAPIKey() + "/pair/" + ipc.toUpperCase() + "/" + opc.toUpperCase() + "/" + amount; //Set the URL
         //*Sending the request to the API*/
         @SuppressWarnings("deprecation")
         URL url = new URL(request);
@@ -44,7 +57,7 @@ public class Converter {
     }
     public static boolean valid(String currency) throws IOException{
         /*Send the Request*/
-        String request = "https://v6.exchangerate-api.com/v6/06741fac186a1c060f657f96/codes";
+        String request = "https://v6.exchangerate-api.com/v6/" + getAPIKey() + "/codes";
         @SuppressWarnings("deprecation")
         URL url = new URL(request);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -65,7 +78,7 @@ public class Converter {
     }
     public static ArrayList<Currency> initialize() throws IOException { //Initialize Method to create a list of currencies, used in creating the dropdown
         /*Send the request and store the 'supported_codes' into a JSON Array*/
-        String request = "https://v6.exchangerate-api.com/v6/06741fac186a1c060f657f96/codes";
+        String request = "https://v6.exchangerate-api.com/v6/" + getAPIKey() + "/codes";
         @SuppressWarnings("deprecation")
         URL url = new URL(request);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

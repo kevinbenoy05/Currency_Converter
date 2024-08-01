@@ -1,4 +1,3 @@
 # Exclude environment configuration files
 .env
-config.json
-secrets/
+config.properties
